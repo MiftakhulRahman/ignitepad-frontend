@@ -10,6 +10,7 @@ export interface Role {
 export interface User {
   id: number;
   name: string;
+  username: string; // <-- TAMBAHKAN INI
   email: string;
   nim: string | null;
   nidn: string | null;
@@ -17,5 +18,8 @@ export interface User {
   bio: string | null;
   avatar: string | null;
   roles: Role[];
-  // Tambahkan properti lain jika Anda membutuhkannya
+  // properti opsional dari profil publik
+  github_url?: string;
+  linkedin_url?: string;
+  website_url?: string;
 }

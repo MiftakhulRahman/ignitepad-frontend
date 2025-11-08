@@ -1,10 +1,11 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { cn } from "@/lib/utils" // cn utility dari shadcn
+import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { QueryProvider } from "@/components/providers/query-provider"
-import { Toaster } from "react-hot-toast" // Provider notifikasi
+import { Toaster } from "react-hot-toast"
+import Navbar from "@/components/layout/Navbar" // <-- 1. Impor Navbar
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -23,26 +24,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head />
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
-        {/* Provider Dark/Light Mode */}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {/* Provider Data Fetching */}
           <QueryProvider>
-            {/* Provider Notifikasi Toaster */}
             <Toaster position="top-center" reverseOrder={false} />
             
-            {/* Halaman Anda akan dirender di sini */}
-            {children}
+            {/* 2. Tampilkan Navbar di sini */}
+            <Navbar />
+            
+            {/* 3. Render sisa halaman */}
+            <main>{children}</main>
+            
           </QueryProvider>
         </ThemeProvider>
       </body>

@@ -2,12 +2,13 @@
 
 import * as React from "react"
 import { useState } from "react"
-import { useRouter } from "next/navigation" // <-- 1. Impor router
+import { useRouter } from "next/navigation"
+import Link from "next/link"
 import apiClient, { apiBase } from "@/lib/api/client"
 import { toast } from "react-hot-toast"
-import { useAuthStore } from "@/lib/stores/auth-store" // <-- 2. Impor auth store
+import { useAuthStore } from "@/lib/stores/auth-store"
 
-// Impor komponen UI
+// Komponen UI
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -24,9 +25,9 @@ export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  
-  const router = useRouter() // <-- 3. Inisialisasi router
-  const setUser = useAuthStore((state) => state.setUser) // <-- 4. Ambil action 'setUser'
+
+  const router = useRouter()
+  const setUser = useAuthStore((state) => state.setUser)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -34,26 +35,27 @@ export default function LoginPage() {
     toast.loading("Mencoba login...")
 
     try {
+      // Dapatkan CSRF cookie (jika backend Laravel Sanctum)
       await apiBase.get("/sanctum/csrf-cookie")
-      
+
+      // Kirim data login ke backend
       const response = await apiClient.post("/auth/login", {
         email: email,
         password: password,
       })
 
-      // 5. Berhasil! Simpan user dan token ke store
+      // Simpan user dan token ke store global
       setUser(response.data.user, response.data.access_token)
-      
+
       toast.dismiss()
       toast.success(`Selamat datang, ${response.data.user.name}!`)
-      
-      // 6. Redirect ke dashboard
-      router.push("/dashboard")
 
+      // Arahkan ke dashboard
+      router.push("/dashboard")
     } catch (error: any) {
       toast.dismiss()
       console.error("Login Gagal:", error)
-      
+
       if (error.response?.status === 401) {
         toast.error("Login gagal: Email atau password salah.")
       } else {
@@ -65,7 +67,6 @@ export default function LoginPage() {
   }
 
   return (
-    // ... (Kode JSX form-nya tetap sama, tidak perlu diubah) ...
     <div className="flex items-center justify-center min-h-screen">
       <Card className="w-full max-w-md">
         <CardHeader>
@@ -74,6 +75,7 @@ export default function LoginPage() {
             Masukkan email dan password Anda di bawah ini.
           </CardDescription>
         </CardHeader>
+
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
@@ -88,6 +90,7 @@ export default function LoginPage() {
                 disabled={isLoading}
               />
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input
@@ -100,10 +103,20 @@ export default function LoginPage() {
               />
             </div>
           </CardContent>
-          <CardFooter>
+
+          {/* Bagian Footer yang sudah diubah */}
+          <CardFooter className="flex flex-col gap-4">
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? "Loading..." : "Login"}
             </Button>
+
+            {/* Link ke halaman register */}
+            <p className="text-sm text-center text-muted-foreground">
+              Belum punya akun?{" "}
+              <Link href="/register" className="font-semibold text-primary">
+                Daftar di sini
+              </Link>
+            </p>
           </CardFooter>
         </form>
       </Card>

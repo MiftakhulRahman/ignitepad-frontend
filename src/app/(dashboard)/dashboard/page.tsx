@@ -1,6 +1,7 @@
 "use client"
 
 import { useAuthStore } from "@/lib/stores/auth-store"
+import Link from "next/link"
 
 export default function DashboardPage() {
   // Ambil data user dari store
@@ -13,6 +14,21 @@ export default function DashboardPage() {
         Halo, <span className="font-semibold">{user?.name}</span>!
       </p>
       <p>Role Anda adalah: {user?.roles[0]?.name}</p>
+
+      <div className="mt-8">
+        <h2 className="text-2xl font-semibold">Navigasi Cepat</h2>
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Link href="/dashboard/my-projects" className="p-4 border rounded-lg hover:bg-muted">
+            Proyek Saya
+          </Link>
+          <Link href="/dashboard/saved-projects" className="p-4 border rounded-lg hover:bg-muted">
+            Proyek Tersimpan
+          </Link>
+          <Link href="/dashboard/my-challenges" className="p-4 border rounded-lg hover:bg-muted">
+            Challenge Saya
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

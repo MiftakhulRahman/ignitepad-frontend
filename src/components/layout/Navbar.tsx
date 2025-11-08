@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react" // <-- 1. TAMBAHKAN IMPORT INI
 import { useAuthStore } from "@/lib/stores/auth-store"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -11,15 +12,19 @@ export default function Navbar() {
   const { isAuthenticated, user, clearUser } = useAuthStore()
   const router = useRouter()
 
+  // 2. Cek role admin (Sekarang React.useMemo akan dikenali)
+  const isAdmin = React.useMemo(
+    () => user?.roles.some((role) => role.name === "admin"),
+    [user]
+  )
+
   const handleLogout = async () => {
     toast.loading("Logging out...")
     try {
-      // Panggil endpoint logout di backend
       await apiClient.post("/auth/logout")
     } catch (error) {
       console.error("Logout error", error)
     } finally {
-      // Apapun yang terjadi, hapus data di frontend
       clearUser()
       toast.dismiss()
       toast.success("Berhasil logout")
@@ -37,10 +42,20 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {isAuthenticated ? (
             <>
-              <span>Hi, {user?.name}</span>
-              <Button asChild>
+              {isAdmin && (
+                <Button variant="destructive" asChild>
+                  <Link href="/admin/users">Admin Panel</Link>
+                </Button>
+              )}
+
+              <Button variant="default" asChild>
+                <Link href="/dashboard/my-projects/create">Buat Proyek</Link>
+              </Button>
+
+              <Button variant="secondary" asChild>
                 <Link href="/dashboard">Dashboard</Link>
               </Button>
+
               <Button variant="ghost" onClick={handleLogout}>
                 Logout
               </Button>

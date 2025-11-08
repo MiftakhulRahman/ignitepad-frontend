@@ -1,3 +1,5 @@
+// src/lib/config/breadcrumbs.ts
+
 export interface BreadcrumbItem {
   label: string
   href?: string
@@ -14,12 +16,16 @@ export interface BreadcrumbConfig {
 }
 
 export const breadcrumbConfig: BreadcrumbConfig = {
-  // Home
+  // ==============================
+  // 🏠 Home
+  // ==============================
   "/": {
     items: [{ label: "Home", href: "/" }],
   },
 
-  // Projects
+  // ==============================
+  // 💼 Projects
+  // ==============================
   "/projects": {
     items: [{ label: "Home", href: "/" }, { label: "Projects" }],
   },
@@ -34,7 +40,9 @@ export const breadcrumbConfig: BreadcrumbConfig = {
     },
   },
 
-  // Challenges
+  // ==============================
+  // 🧩 Challenges
+  // ==============================
   "/challenges": {
     items: [{ label: "Home", href: "/" }, { label: "Challenges" }],
   },
@@ -49,9 +57,30 @@ export const breadcrumbConfig: BreadcrumbConfig = {
     },
   },
 
-  // Dashboard
+  // ==============================
+  // 📊 Dashboard
+  // ==============================
   "/dashboard": {
     items: [{ label: "Home", href: "/" }, { label: "Dashboard" }],
   },
-  // (Kita tambahkan sisanya saat membuat halaman dashboard)
+
+  // ==============================
+  // 👤 Profile
+  // ==============================
+  "/profile/[username]": { // <-- diganti dari [id]
+    items: [
+      { label: "Home", href: "/" },
+      { label: "Profile", dynamic: true },
+    ],
+    dynamic: {
+      username: (user: any) => ({ label: user.name }), // <-- diganti dari 'id'
+    },
+  },
+
+  // ==============================
+  // ⚙️ Admin (opsional)
+  // ==============================
+  // "/admin": {
+  //   items: [{ label: "Home", href: "/" }, { label: "Admin" }],
+  // },
 }
