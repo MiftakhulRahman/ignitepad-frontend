@@ -84,7 +84,6 @@ export default function LoginPage() {
         error.response?.data?.message || 'Login gagal. Silakan coba lagi.'
       );
     },
-    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {

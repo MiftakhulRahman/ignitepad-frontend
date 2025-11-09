@@ -40,7 +40,7 @@ export const NAVIGATION_CONFIG = {
         { label: 'Dashboard', href: '/dashboard', icon: 'LayoutDashboard' },
         { label: 'Pengguna', href: '/dashboard/pengguna', icon: 'Users' },
         { label: 'Proyek', href: '/dashboard/proyek', icon: 'FolderOpen' },
-        { label: 'Challenge', href: '/dashboard/challenge', icon: 'Trophy' },
+        { label: 'Challenge', href: '/dashboard/challenges', icon: 'Trophy' },
         { label: 'Kategori', href: '/dashboard/kategori', icon: 'Tag' },
         { label: 'Teknologi', href: '/dashboard/teknologi', icon: 'Code' },
       ],

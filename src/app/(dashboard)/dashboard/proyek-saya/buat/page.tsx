@@ -58,6 +58,8 @@ export default function BuatProyekPage() {
     title: '',
     description: '',
     content: '',
+    demo_url: '',
+    repository_url: '',
     tags: '' as string | string[], // Will be comma-separated string, converted to array later
     category: '',
     status: 'draft',
@@ -241,6 +243,40 @@ export default function BuatProyekPage() {
                   placeholder="Pilih teknologi yang digunakan..."
                 />
               )}
+            </div>
+
+            {/* Demo URL */}
+            <div className="space-y-2">
+              <label htmlFor="demo_url" className="text-sm font-medium">
+                Demo URL
+              </label>
+              <Input
+                id="demo_url"
+                type="url"
+                placeholder="https://demo-project.com"
+                value={formData.demo_url}
+                onChange={(e) => setFormData({ ...formData, demo_url: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">
+                Tautan ke demo proyek Anda (jika ada)
+              </p>
+            </div>
+
+            {/* Repository URL */}
+            <div className="space-y-2">
+              <label htmlFor="repository_url" className="text-sm font-medium">
+                Repository URL
+              </label>
+              <Input
+                id="repository_url"
+                type="url"
+                placeholder="https://github.com/username/repository"
+                value={formData.repository_url}
+                onChange={(e) => setFormData({ ...formData, repository_url: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">
+                Tautan ke repository kode sumber (GitHub, GitLab, dll)
+              </p>
             </div>
 
             {/* Tags */}

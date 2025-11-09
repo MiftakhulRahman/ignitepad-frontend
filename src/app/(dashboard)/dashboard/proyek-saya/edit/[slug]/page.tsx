@@ -37,6 +37,8 @@ export default function EditProyekPage({ params }: { params: { slug: string } })
     title: '',
     description: '',
     content: '',
+    demo_url: '',
+    repository_url: '',
     category: '',
     status: 'draft',
     visibility: 'private',
@@ -85,6 +87,8 @@ export default function EditProyekPage({ params }: { params: { slug: string } })
         title: project.title || '',
         description: project.description || '',
         content: project.content || '',
+        demo_url: project.demo_url || '',
+        repository_url: project.repository_url || '',
         tags: project.tags || [],
         category: project.category || '',
         status: project.status || 'draft',
@@ -313,6 +317,40 @@ export default function EditProyekPage({ params }: { params: { slug: string } })
                   placeholder="Pilih teknologi yang digunakan..."
                 />
               )}
+            </div>
+
+            {/* Demo URL */}
+            <div className="space-y-2">
+              <label htmlFor="demo_url" className="text-sm font-medium">
+                Demo URL
+              </label>
+              <Input
+                id="demo_url"
+                type="url"
+                placeholder="https://demo-project.com"
+                value={formData.demo_url}
+                onChange={(e) => setFormData({ ...formData, demo_url: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">
+                Tautan ke demo proyek Anda (jika ada)
+              </p>
+            </div>
+
+            {/* Repository URL */}
+            <div className="space-y-2">
+              <label htmlFor="repository_url" className="text-sm font-medium">
+                Repository URL
+              </label>
+              <Input
+                id="repository_url"
+                type="url"
+                placeholder="https://github.com/username/repository"
+                value={formData.repository_url}
+                onChange={(e) => setFormData({ ...formData, repository_url: e.target.value })}
+              />
+              <p className="text-xs text-muted-foreground">
+                Tautan ke repository kode sumber (GitHub, GitLab, dll)
+              </p>
             </div>
 
             {/* Tags */}

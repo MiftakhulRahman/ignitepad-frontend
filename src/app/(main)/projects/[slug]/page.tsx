@@ -8,7 +8,7 @@ import { Breadcrumb } from '@/components/layout/breadcrumb';
 import { useBreadcrumb } from '@/lib/hooks/use-breadcrumb';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/lib/stores/auth-store';
-import { Heart, Bookmark, Eye, MessageSquare, Calendar } from 'lucide-react';
+import { Heart, Bookmark, Eye, MessageSquare, Calendar, ExternalLink, Github } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
@@ -329,6 +329,31 @@ export default function ProjectDetailPage() {
                     </div>
                   </div>
                 </Link>
+              </div>
+            )}
+
+            {/* Project Links */}
+            {(project.demo_url || project.repository_url) && (
+              <div className="border rounded-lg p-4">
+                <h3 className="font-semibold mb-3">Project Links</h3>
+                <div className="space-y-2">
+                  {project.demo_url && (
+                    <Button variant="outline" className="w-full justify-start" asChild>
+                      <a href={project.demo_url} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Demo Website
+                      </a>
+                    </Button>
+                  )}
+                  {project.repository_url && (
+                    <Button variant="outline" className="w-full justify-start" asChild>
+                      <a href={project.repository_url} target="_blank" rel="noopener noreferrer">
+                        <Github className="h-4 w-4 mr-2" />
+                        Source Code
+                      </a>
+                    </Button>
+                  )}
+                </div>
               </div>
             )}
 
