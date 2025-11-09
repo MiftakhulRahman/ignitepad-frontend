@@ -73,7 +73,7 @@ export default function LoginPage() {
         router.push('/dashboard');
       } else {
         console.error('Invalid response structure:', response);
-        setError('Invalid response from server');
+        setError('Respons tidak valid dari server');
       }
     },
     onError: (error: any) => {
@@ -81,8 +81,9 @@ export default function LoginPage() {
       console.error('Error response:', error.response);
 
       setError(
-        error.response?.data?.message || 'Login failed. Please try again.'
+        error.response?.data?.message || 'Login gagal. Silakan coba lagi.'
       );
+    },
     },
   });
 
@@ -95,9 +96,9 @@ export default function LoginPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Login to Ignitepad</CardTitle>
+        <CardTitle>Masuk ke Ignitepad</CardTitle>
         <CardDescription>
-          Enter your email and password to access your account
+          Masukkan email dan password Anda untuk mengakses akun
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -115,7 +116,7 @@ export default function LoginPage() {
             <Input
               id="email"
               type="email"
-              placeholder="your@email.com"
+              placeholder="email@anda.com"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -145,15 +146,15 @@ export default function LoginPage() {
             className="w-full"
             disabled={loginMutation.isPending}
           >
-            {loginMutation.isPending ? 'Logging in...' : 'Login'}
+            {loginMutation.isPending ? 'Sedang masuk...' : 'Masuk'}
           </Button>
         </form>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
         <div className="text-sm text-center">
-          Don't have an account?{' '}
+          Belum punya akun?{' '}
           <Link href="/register" className="text-primary hover:underline">
-            Sign up
+            Daftar
           </Link>
         </div>
       </CardFooter>

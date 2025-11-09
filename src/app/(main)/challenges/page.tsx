@@ -25,10 +25,10 @@ export default function ChallengesPage() {
   });
 
   const statuses = [
-    { value: '', label: 'All Status' },
-    { value: 'open', label: 'Open' },
-    { value: 'closed', label: 'Closed' },
-    { value: 'completed', label: 'Completed' },
+    { value: '', label: 'Semua Status' },
+    { value: 'open', label: 'Dibuka' },
+    { value: 'closed', label: 'Ditutup' },
+    { value: 'completed', label: 'Selesai' },
   ];
 
   return (
@@ -36,9 +36,9 @@ export default function ChallengesPage() {
       <Breadcrumb />
 
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">Challenges</h1>
+        <h1 className="text-4xl font-bold mb-4">Challenge</h1>
         <p className="text-muted-foreground">
-          Join exciting academic challenges and compete with peers
+          Ikuti challenge akademik menarik dan berkompetisi dengan rekan Anda
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default function ChallengesPage() {
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search challenges..."
+            placeholder="Cari challenge..."
             className="pl-10"
             value={filters.search}
             onChange={(e) =>
@@ -137,19 +137,19 @@ export default function ChallengesPage() {
                       )}
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <Users className="h-4 w-4" />
-                        <span>{challenge.participant_count} participants</span>
+                        <span>{challenge.participant_count} peserta</span>
                       </div>
                       {challenge.winner_project_id && (
                         <div className="flex items-center gap-2 text-yellow-600">
                           <Trophy className="h-4 w-4" />
-                          <span>Winner announced</span>
+                          <span>Pemenang diumumkan</span>
                         </div>
                       )}
                     </div>
                   </CardContent>
                   <CardFooter>
                     <Button variant="outline" className="w-full">
-                      View Details
+                      Lihat Detail
                     </Button>
                   </CardFooter>
                 </Card>
@@ -167,10 +167,10 @@ export default function ChallengesPage() {
                   setFilters({ ...filters, page: filters.page - 1 })
                 }
               >
-                Previous
+                Sebelumnya
               </Button>
               <span className="flex items-center px-4">
-                Page {data.meta.current_page} of {data.meta.last_page}
+                Halaman {data.meta.current_page} dari {data.meta.last_page}
               </span>
               <Button
                 variant="outline"
@@ -179,14 +179,14 @@ export default function ChallengesPage() {
                   setFilters({ ...filters, page: filters.page + 1 })
                 }
               >
-                Next
+                Berikutnya
               </Button>
             </div>
           )}
         </>
       ) : (
         <div className="text-center py-16">
-          <p className="text-muted-foreground">No challenges found.</p>
+          <p className="text-muted-foreground">Tidak ada challenge ditemukan.</p>
         </div>
       )}
     </div>

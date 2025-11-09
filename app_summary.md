@@ -4931,6 +4931,6 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-lengkapi semua fitur yang belum kecuali notifikasi. dan frontend nya masih baru generate belum di isi. backend nya berjalan di http://ignitepad-backend.test/
+lengkapi semua fitur yang belum kecuali notifikasi. backend nya berjalan di http://ignitepad-backend.test/
 
 tolong kerjakan dengan lengkap dan coding yang benar

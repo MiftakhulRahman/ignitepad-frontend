@@ -71,14 +71,14 @@ export default function RegisterPage() {
         router.push('/dashboard');
       } else {
         console.error('Invalid response structure:', response);
-        setError('Invalid response from server');
+        setError('Respons tidak valid dari server');
       }
     },
     onError: (error: any) => {
       console.error('Register error:', error);
       setError(
         error.response?.data?.message ||
-          'Registration failed. Please try again.'
+          'Pendaftaran gagal. Silakan coba lagi.'
       );
     },
   });
@@ -88,7 +88,7 @@ export default function RegisterPage() {
     setError('');
 
     if (formData.password !== formData.password_confirmation) {
-      setError('Passwords do not match');
+      setError('Password tidak cocok');
       return;
     }
 
@@ -98,9 +98,9 @@ export default function RegisterPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create an Account</CardTitle>
+        <CardTitle>Buat Akun Anda</CardTitle>
         <CardDescription>
-          Join Ignitepad to start sharing your projects
+          Bergabunglah dengan Ignitepad untuk mulai berbagi proyek Anda
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -113,7 +113,7 @@ export default function RegisterPage() {
 
           {/* Role Selection */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">I am a</label>
+            <label className="text-sm font-medium">Saya seorang</label>
             <div className="flex gap-4">
               <label className="flex items-center">
                 <input
@@ -152,7 +152,7 @@ export default function RegisterPage() {
 
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium">
-              Full Name
+              Nama Lengkap
             </label>
             <Input
               id="name"
@@ -189,7 +189,7 @@ export default function RegisterPage() {
             <Input
               id="email"
               type="email"
-              placeholder="your@email.com"
+              placeholder="email@anda.com"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -235,7 +235,7 @@ export default function RegisterPage() {
               </div>
               <div className="space-y-2">
                 <label htmlFor="niyp" className="text-sm font-medium">
-                  NIYP (Optional)
+                  NIYP (Opsional)
                 </label>
                 <Input
                   id="niyp"
@@ -268,7 +268,7 @@ export default function RegisterPage() {
 
           <div className="space-y-2">
             <label htmlFor="password_confirmation" className="text-sm font-medium">
-              Confirm Password
+              Konfirmasi Password
             </label>
             <Input
               id="password_confirmation"
@@ -290,15 +290,15 @@ export default function RegisterPage() {
             className="w-full"
             disabled={registerMutation.isPending}
           >
-            {registerMutation.isPending ? 'Creating account...' : 'Sign Up'}
+            {registerMutation.isPending ? 'Membuat akun...' : 'Daftar'}
           </Button>
         </form>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
         <div className="text-sm text-center">
-          Already have an account?{' '}
+          Sudah punya akun?{' '}
           <Link href="/login" className="text-primary hover:underline">
-            Login
+            Masuk
           </Link>
         </div>
       </CardFooter>

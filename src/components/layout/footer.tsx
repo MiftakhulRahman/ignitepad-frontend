@@ -16,14 +16,14 @@ export function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-4">Tautan Cepat</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   href="/projects"
                   className="text-muted-foreground hover:text-foreground"
                 >
-                  Projects
+                  Proyek
                 </Link>
               </li>
               <li>
@@ -31,7 +31,7 @@ export function Footer() {
                   href="/challenges"
                   className="text-muted-foreground hover:text-foreground"
                 >
-                  Challenges
+                  Challenge
                 </Link>
               </li>
               <li>
@@ -47,7 +47,7 @@ export function Footer() {
 
           {/* Community */}
           <div>
-            <h4 className="font-semibold mb-4">Community</h4>
+            <h4 className="font-semibold mb-4">Komunitas</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
@@ -85,7 +85,7 @@ export function Footer() {
                   href="#"
                   className="text-muted-foreground hover:text-foreground"
                 >
-                  Privacy Policy
+                  Kebijakan Privasi
                 </a>
               </li>
               <li>
@@ -93,7 +93,7 @@ export function Footer() {
                   href="#"
                   className="text-muted-foreground hover:text-foreground"
                 >
-                  Terms of Service
+                  Syarat Layanan
                 </a>
               </li>
             </ul>

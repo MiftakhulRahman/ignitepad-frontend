@@ -19,9 +19,9 @@ export function Navbar() {
   };
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/challenges', label: 'Challenges' },
+    { href: '/', label: 'Beranda' },
+    { href: '/projects', label: 'Proyek' },
+    { href: '/challenges', label: 'Challenge' },
   ];
 
   return (
@@ -62,16 +62,16 @@ export function Navbar() {
                   <Button variant="ghost">{user.name}</Button>
                 </Link>
                 <Button variant="outline" onClick={handleLogout}>
-                  Logout
+                  Keluar
                 </Button>
               </>
             ) : (
               <>
                 <Link href="/login">
-                  <Button variant="ghost">Login</Button>
+                  <Button variant="ghost">Masuk</Button>
                 </Link>
                 <Link href="/register">
-                  <Button>Sign Up</Button>
+                  <Button>Daftar</Button>
                 </Link>
               </>
             )}
@@ -127,18 +127,18 @@ export function Navbar() {
                     className="w-full"
                     onClick={handleLogout}
                   >
-                    Logout
+                    Keluar
                   </Button>
                 </>
               ) : (
                 <>
                   <Link href="/login" className="block">
                     <Button variant="ghost" className="w-full">
-                      Login
+                      Masuk
                     </Button>
                   </Link>
                   <Link href="/register" className="block">
-                    <Button className="w-full">Sign Up</Button>
+                    <Button className="w-full">Daftar</Button>
                   </Link>
                 </>
               )}
