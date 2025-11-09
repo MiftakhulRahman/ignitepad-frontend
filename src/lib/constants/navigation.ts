@@ -6,7 +6,7 @@ export const NAVIGATION_CONFIG = {
         { label: 'Dashboard', href: '/dashboard', icon: 'LayoutDashboard' },
         { label: 'Proyek Saya', href: '/dashboard/proyek-saya', icon: 'FolderOpen' },
         { label: 'Proyek Tersimpan', href: '/dashboard/tersimpan', icon: 'Bookmark' },
-        { label: 'Challenge Saya', href: '/dashboard/challenge-saya', icon: 'Trophy' },
+        { label: 'Challenge', href: '/dashboard/challenge', icon: 'Trophy' },
       ],
     },
     {
@@ -22,7 +22,6 @@ export const NAVIGATION_CONFIG = {
       items: [
         { label: 'Dashboard', href: '/dashboard', icon: 'LayoutDashboard' },
         { label: 'Proyek Saya', href: '/dashboard/proyek-saya', icon: 'FolderOpen' },
-        { label: 'Bimbingan', href: '/dashboard/bimbingan', icon: 'Users' },
         { label: 'Challenge', href: '/dashboard/challenge', icon: 'Trophy' },
         { label: 'Proyek Tersimpan', href: '/dashboard/tersimpan', icon: 'Bookmark' },
       ],
@@ -36,12 +35,14 @@ export const NAVIGATION_CONFIG = {
   ],
   admin: [
     {
-      section: 'Menu Utama',
+      section: 'Kelola',
       items: [
         { label: 'Dashboard', href: '/dashboard', icon: 'LayoutDashboard' },
         { label: 'Pengguna', href: '/dashboard/pengguna', icon: 'Users' },
         { label: 'Proyek', href: '/dashboard/proyek', icon: 'FolderOpen' },
         { label: 'Challenge', href: '/dashboard/challenge', icon: 'Trophy' },
+        { label: 'Kategori', href: '/dashboard/kategori', icon: 'Tag' },
+        { label: 'Teknologi', href: '/dashboard/teknologi', icon: 'Code' },
       ],
     },
     {

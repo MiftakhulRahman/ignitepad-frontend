@@ -4,6 +4,7 @@ import "./globals.css";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthProvider } from "@/components/providers/auth-provider";
+import { ToastProvider } from "@/components/providers/toast-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -30,7 +31,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <QueryProvider>{children}</QueryProvider>
+            <QueryProvider>
+              {children}
+              <ToastProvider />
+            </QueryProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

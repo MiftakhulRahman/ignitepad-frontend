@@ -13,7 +13,9 @@ import {
   Trophy, 
   Users, 
   Settings,
-  ChevronRight
+  ChevronRight,
+  Tag,
+  Code
 } from 'lucide-react';
 
 const iconMap = {
@@ -23,6 +25,8 @@ const iconMap = {
   Trophy,
   Users,
   Settings,
+  Tag,
+  Code,
 };
 
 interface DashboardSidebarProps {
@@ -34,17 +38,29 @@ export function DashboardSidebar({ isCollapsed }: DashboardSidebarProps) {
   const { user } = useAuthStore();
   
   // Get user role (default to mahasiswa)
-  const userRole = user?.roles?.[0]?.name || 'mahasiswa';
+  const userRole = user?.role || 'mahasiswa';
   const navigation = NAVIGATION_CONFIG[userRole as keyof typeof NAVIGATION_CONFIG] || NAVIGATION_CONFIG.mahasiswa;
 
   return (
     <aside
       className={cn(
-        'fixed left-0 top-16 h-[calc(100vh-4rem)] bg-card border-r transition-all duration-300 z-30',
+        'fixed left-0 top-0 h-screen bg-card border-r transition-all duration-300 z-40',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
-      <nav className="h-full overflow-y-auto p-4">
+      {/* Logo */}
+      <div className="h-16 flex items-center justify-center border-b">
+        <Link href="/" className="flex items-center gap-2">
+          <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm">IP</span>
+          </div>
+          {!isCollapsed && (
+            <span className="font-semibold text-lg">Ignitepad</span>
+          )}
+        </Link>
+      </div>
+      
+      <nav className="h-[calc(100vh-4rem)] overflow-y-auto p-4">
         {navigation.map((section, idx) => (
           <div key={idx} className={cn('mb-6', idx > 0 && 'pt-6 border-t')}>
             {!isCollapsed && (
@@ -63,6 +79,7 @@ export function DashboardSidebar({ isCollapsed }: DashboardSidebarProps) {
                       href={item.href}
                       className={cn(
                         'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                        isCollapsed && 'justify-center',
                         isActive
                           ? 'bg-primary text-primary-foreground'
                           : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'

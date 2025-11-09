@@ -37,11 +37,35 @@ export default function RegisterPage() {
     mutationFn: authApi.register,
     onSuccess: (response) => {
       console.log('Register response:', response);
+
+      // Handle the expected response structure based on the API definition
+      // authApi.register returns Promise<ApiResponse<{ user: User; token: string }>>
       
-      // Backend returns: { user, access_token, message, token_type }
-      const user = response.data?.user || response.user;
-      const token = response.data?.access_token || response.access_token || response.data?.token || response.token;
-      
+      // First try the expected format
+      let user = response.data?.user;
+      let token = response.data?.token;
+
+      // If the expected format isn't available, try to look for other possible formats
+      // This handles cases where the backend might return a different structure
+      if (!user || !token) {
+        // Type assertion to allow accessing additional properties
+        const responseData = response.data as any;
+        
+        // Check if user and additional token fields exist in response data
+        if (responseData?.user && (responseData?.access_token || responseData?.token)) {
+          user = responseData.user;
+          token = responseData.access_token || responseData.token;
+        } else {
+          // Check if response itself contains user and token (less likely for our API, but for safety)
+          // This would indicate a different API contract than expected
+          const responseAny = response as any;
+          if (responseAny?.user && (responseAny?.access_token || responseAny?.token)) {
+            user = responseAny.user;
+            token = responseAny.access_token || responseAny.token;
+          }
+        }
+      }
+
       if (user && token) {
         setAuth(user, token);
         router.push('/dashboard');

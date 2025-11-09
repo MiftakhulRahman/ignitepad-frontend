@@ -3,6 +3,7 @@ import { create } from 'zustand';
 export interface BreadcrumbItem {
   label: string;
   href?: string;
+  dynamic?: boolean;
 }
 
 interface BreadcrumbState {

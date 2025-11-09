@@ -5,22 +5,24 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import { Button } from '@/components/ui/button';
-import { 
-  Menu, 
-  User, 
-  LogOut, 
-  Settings, 
-  Sun, 
+import { cn } from '@/lib/utils/cn';
+import {
+  Menu,
+  User,
+  LogOut,
+  Settings,
+  Sun,
   Moon,
-  ChevronDown 
+  ChevronDown
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 interface DashboardHeaderProps {
   onToggleSidebar: () => void;
+  isCollapsed: boolean;
 }
 
-export function DashboardHeader({ onToggleSidebar }: DashboardHeaderProps) {
+export function DashboardHeader({ onToggleSidebar, isCollapsed }: DashboardHeaderProps) {
   const router = useRouter();
   const { user, clearAuth } = useAuthStore();
   const { theme, setTheme } = useTheme();
@@ -36,25 +38,25 @@ export function DashboardHeader({ onToggleSidebar }: DashboardHeaderProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 bg-card border-b z-40">
+    <header
+      className={cn(
+        'fixed top-0 right-0 h-16 border-b z-50 transition-all duration-300',
+        isCollapsed ? 'left-16' : 'left-64'
+      )}
+      style={{
+        backgroundColor: theme === 'dark' ? '#09090b' : '#ffffff',
+      }}
+    >
       <div className="flex items-center justify-between h-full px-4">
-        {/* Left: Hamburger + Logo */}
+        {/* Left: Hamburger */}
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
             size="icon"
             onClick={onToggleSidebar}
-            className="lg:flex"
           >
             <Menu className="h-5 w-5" />
           </Button>
-          
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">IP</span>
-            </div>
-            <span className="font-semibold text-lg hidden sm:inline">Ignitepad</span>
-          </Link>
         </div>
 
         {/* Right: Dark Mode + Profile */}
@@ -88,8 +90,8 @@ export function DashboardHeader({ onToggleSidebar }: DashboardHeaderProps) {
               <div className="hidden md:block text-left">
                 <p className="text-sm font-medium">{user?.name}</p>
                 <p className="text-xs text-muted-foreground">
-                  {user?.roles?.[0]?.name === 'mahasiswa' ? 'Mahasiswa' : 
-                   user?.roles?.[0]?.name === 'dosen' ? 'Dosen' : 'Admin'}
+                  {user?.role === 'mahasiswa' ? 'Mahasiswa' :
+                   user?.role === 'dosen' ? 'Dosen' : 'Admin'}
                 </p>
               </div>
               <ChevronDown className="h-4 w-4 hidden md:block" />
@@ -99,38 +101,58 @@ export function DashboardHeader({ onToggleSidebar }: DashboardHeaderProps) {
             {isProfileOpen && (
               <>
                 {/* Overlay */}
-                <div 
+                <div
                   className="fixed inset-0 z-40"
                   onClick={() => setIsProfileOpen(false)}
                 />
-                
+
                 {/* Menu */}
-                <div className="absolute right-0 mt-2 w-56 bg-card border rounded-lg shadow-lg z-50">
+                <div
+                  className="absolute right-0 mt-2 w-56 border rounded-lg shadow-lg z-50"
+                  style={{
+                    backgroundColor: theme === 'dark' ? '#09090b' : '#ffffff',
+                  }}
+                >
                   <div className="p-3 border-b">
                     <p className="font-medium">{user?.name}</p>
                     <p className="text-sm text-muted-foreground">{user?.email}</p>
                   </div>
-                  
-                  <div className="p-2">
-                    <Link
-                      href={`/profile/${user?.username}`}
-                      className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent transition-colors"
-                      onClick={() => setIsProfileOpen(false)}
-                    >
-                      <User className="h-4 w-4" />
-                      <span className="text-sm">Profil Saya</span>
-                    </Link>
-                    
-                    <Link
-                      href="/dashboard/pengaturan"
-                      className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent transition-colors"
-                      onClick={() => setIsProfileOpen(false)}
-                    >
-                      <Settings className="h-4 w-4" />
-                      <span className="text-sm">Pengaturan</span>
-                    </Link>
-                  </div>
-                  
+
+                  {user?.role !== 'admin' && (
+                    <div className="p-2">
+                      <Link
+                        href={`/profile/@${user?.username}`}
+                        className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent transition-colors"
+                        onClick={() => setIsProfileOpen(false)}
+                      >
+                        <User className="h-4 w-4" />
+                        <span className="text-sm">Profil Saya</span>
+                      </Link>
+
+                      <Link
+                        href="/dashboard/pengaturan"
+                        className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent transition-colors"
+                        onClick={() => setIsProfileOpen(false)}
+                      >
+                        <Settings className="h-4 w-4" />
+                        <span className="text-sm">Pengaturan</span>
+                      </Link>
+                    </div>
+                  )}
+
+                  {user?.role === 'admin' && (
+                    <div className="p-2">
+                      <Link
+                        href="/dashboard/pengaturan"
+                        className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-accent transition-colors"
+                        onClick={() => setIsProfileOpen(false)}
+                      >
+                        <Settings className="h-4 w-4" />
+                        <span className="text-sm">Pengaturan</span>
+                      </Link>
+                    </div>
+                  )}
+
                   <div className="p-2 border-t">
                     <button
                       onClick={handleLogout}
